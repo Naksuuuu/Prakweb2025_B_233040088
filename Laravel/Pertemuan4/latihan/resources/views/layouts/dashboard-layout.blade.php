@@ -7,18 +7,18 @@
     <title>@yield('title', 'Aplikasi Laravel')</title>
     {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
     @vite('resources/css/app.css')
+
 </head>
 
 <body class="bg-gray-100 font-sans antialiased">
 
-    @include('components.navbar')
+    @include('components.navbar-dashboard')
 
     <main class="w-full min-h-screen flex justify-center items-center p-4">
         @yield('content')
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
-
 </body>
 
 </html>
