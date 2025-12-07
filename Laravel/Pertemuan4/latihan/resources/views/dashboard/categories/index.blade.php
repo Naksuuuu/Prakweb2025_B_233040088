@@ -41,7 +41,7 @@
             </div>
         @endif
 
-        <h1 class="text-3xl font-bold text-gray-800 mb-6">Dashboard</h1>
-        @include('components.table')
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">Categories</h1>
+        @include('components.categories.table')
     </div>
 @endsection

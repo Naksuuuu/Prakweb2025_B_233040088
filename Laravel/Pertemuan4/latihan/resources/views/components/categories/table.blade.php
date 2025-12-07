@@ -1,6 +1,6 @@
 <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center gap-4 ">
 
-    <form method="GET" action="{{ route('dashboard.posts.index') }}" class="flex flex-1 max-w-md">
+    <form method="GET" action="{{ route('dashboard.categories.index') }}" class="flex flex-1 max-w-md">
         <label for="search" class="sr-only">Search</label>
 
         <div class="relative flex-1">
@@ -15,7 +15,7 @@
 
             <input type="search" name="search" id="search" value="{{ request('search') }}"
                 class="block w-full input py-3 ps-9 bg-neutral-secondary border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
-                placeholder="Search posts..." />
+                placeholder="Search categories..." />
 
             <button type="submit"
                 class="absolute end-1.5 bottom-1.5 text-white bg-brand hover:bg-brand-strong border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-text px-3 py-1.5 focus:outline-none">
@@ -25,13 +25,13 @@
         </div>
     </form>
 
-    <a href="{{ route('dashboard.posts.create') }}"
+    <a href="{{ route('dashboard.categories.create') }}"
         class="inline-flex items-center center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-sm transition-colors duration-200 whitespace-nowrap">
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
         </svg>
-        Add Post
+        Add Category
     </a>
 
 </div>
@@ -44,10 +44,7 @@
                     No
                 </th>
                 <th scope="col" class="px-6 py-3 font-medium">
-                    Title
-                </th>
-                <th scope="col" class="px-6 py-3 font-medium">
-                    Category
+                    Name
                 </th>
                 <th scope="col" class="px-6 py-3 font-medium">
                     Published At
@@ -58,38 +55,35 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($posts as $post)
+            @forelse ($categories as $category)
                 <tr class="bg-neutral-primary border-b border-default">
                     <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
-                        {{ $posts->firstItem() + $loop->index }}
+                        {{ $categories->firstItem() + $loop->index }}
                     </th>
                     <td class="px-6 py-4">
-                        {{ $post->title }}
+                        {{ $category->name }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ $post->category->name }}
+                        {{ $category->created_at->format('d M Y') }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ $post->created_at->format('d M Y') }}
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="{{ route('dashboard.posts.show', $post->slug) }}"
+                        <a href="{{ route('dashboard.categories.show', $category->name) }}"
                             class="text-blue-600 hover:text-blue-800 font-medium me-4">View</a>
-                        {{-- <a href="{{ route('dashboard.posts.edit', $post->slug) }}"
-                            class="text-green-600 hover:text-green-800 font-medium me-4">Edit</a> --}}
-                        {{-- <form action="{{ route('dashboard.posts.destroy', $post->slug) }}" method="POST"
+                        <a href="{{ route('dashboard.categories.edit', $category->name) }}"
+                            class="text-green-600 hover:text-green-800 font-medium me-4">Edit</a>
+                        <form action="{{ route('dashboard.categories.destroy', $category->name) }}" method="POST"
                             class="inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="text-red-600 hover:text-red-800 font-medium"
-                                onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
-                        </form> --}}
+                                onclick="return confirm('Are you sure you want to delete this category?')">Delete</button>
+                        </form>
                     </td>
                 </tr>
             @empty
                 <tr class="bg-neutral-primary border-b border-default">
                     <td colspan="6" class="px-6 py-4 text-center">
-                        <p>No Post Yet</p>
+                        <p>No Category Yet</p>
                     </td>
                 </tr>
             @endforelse
@@ -100,22 +94,22 @@
 </div>
 
 <div class="p-4">
-    @if ($posts->hasPages())
+    @if ($categories->hasPages())
         <div class="px-4 py-4 border-t border-gray-200">
             <nav role="navigation" aria-label="Pagination Navigation" class="flex items-center justify-between">
                 <div class="flex-1 flex justify-between sm:hidden">
                     {{-- Previous Button --}}
-                    @if ($posts->onFirstPage())
+                    @if ($categories->onFirstPage())
                         <span
                             class="flex items-center justify-center text-gray-400 bg-gray-100 box-border border border-gray-300 cursor-not-allowed font-medium rounded-s-base text-sm px-3 h-10">Previous</span>
                     @else
-                        <a href="{{ $posts->previousPageUrl() }}"
+                        <a href="{{ $categories->previousPageUrl() }}"
                             class="flex items-center justify-center text-body bg-neutral-secondary medium-box-border border border-default-medium hover:bg-neutral-tertiary hover:text-heading font-medium rounded-s-base text-sm px-3 h-10 focus:outline-none">Previous</a>
                     @endif
 
                     {{-- Next Button --}}
-                    @if ($posts->hasMorePages())
-                        <a href="{{ $posts->nextPageUrl() }}"
+                    @if ($categories->hasMorePages())
+                        <a href="{{ $categories->nextPageUrl() }}"
                             class="flex items-center justify-center text-body bg-neutral-secondary medium-box-border border border-default-medium hover:bg-neutral-tertiary hover:text-heading font-medium rounded-e-base text-sm px-3 h-10 focus:outline-none">Next</a>
                     @else
                         <span

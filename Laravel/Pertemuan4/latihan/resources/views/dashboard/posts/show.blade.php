@@ -3,7 +3,7 @@
 @section('title', $post->title . ' - Dashboard')
 
 @section('content')
-    <article class="max-w-4xl mx-auto">
+    <article class="max-w-5xl mx-auto bg-neutral-primary p-8 rounded-base shadow-md">
         <header class="mb-8">
             <h1 class="text-4xl font-bold text-gray-800 mb-4">{{ $post->title }}</h1>
 
@@ -15,7 +15,7 @@
 
             @if ($post->image)
                 <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}"
-                    class="w-full h-64 object-cover rounded-lg mb-6">
+                    class="w-full h-72 object-contain rounded-lg mb-6">
             @endif
         </header>
 

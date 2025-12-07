@@ -1,7 +1,7 @@
 @props(['categories'])
 
 {{-- Form Body --}}
-<form action="{{ route('dashboard.posts.store') }}" method="POST">
+<form action="{{ route('dashboard.posts.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
 
     <div class="grid gap-4 grid-cols-2">
@@ -52,6 +52,15 @@
                 class="block w-full p-3.5 text-sm text-gray-900 bg-neutral-secondary medium-box-border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
                 placeholder="Write your post content here">{{ old('body') }}</textarea>
             @error('body')
+                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div class="col-span-2">
+            <label for="image" class="block mb-2.5 text-sm font-medium text-heading">Image</label>
+            <input type="file" name="image" id="image" accept="image/png, image/jpg, image/jpeg"
+                class="bg-neutral-secondary medium-box-border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3  shadow-xs placeholder:text-body">
+            @error('image')
                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
             @enderror
         </div>

@@ -4,9 +4,11 @@
             Dashboard Logo
         </div>
         <ul class="flex gap-4 items-center">
-            <li><a href="{{ url('/') }}" class="text-gray-700 hover:text-gray-900">Home</a></li>
-            <li><a href="{{ route('categories.index') }}" class="text-gray-700 hover:text-gray-900">Categories</a></li>
+            <li><a href="{{ route('dashboard.home') }}" class="text-gray-700 hover:text-gray-900">Home</a></li>
+            <li><a href="{{ route('dashboard.categories.index') }}"
+                    class="text-gray-700 hover:text-gray-900">Categories</a></li>
             <li><a href="{{ route('dashboard.posts.index') }}" class="text-gray-700 hover:text-gray-900">Posts</a></li>
+            <li><a href="{{ route('home') }}" class="text-gray-700 hover:text-gray-900">Beranda</a></li>
 
             <li>
                 <form action="{{ route('logout') }}" method="POST">

@@ -17,7 +17,7 @@
             @endguest
 
             @auth
-                <li><a href="{{ route('dashboard.posts.index') }}" class="text-gray-700 hover:text-gray-900">Dashboard</a>
+                <li><a href="{{ route('dashboard.home') }}" class="text-gray-700 hover:text-gray-900">Dashboard</a>
                 </li>
                 <li>
                     <form action="{{ route('logout') }}" method="POST">
